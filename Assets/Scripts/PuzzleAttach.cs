@@ -13,16 +13,12 @@ public class PuzzleAttach : MonoBehaviour
     {
         //get mouse input in pixels
         Vector3 mouse = Input.mousePosition;
-       
-        
+
         //turning mouse pixel position to world space vectors
         pos = Camera.main.ScreenToWorldPoint(mouse);
-
         
-       
     }
-    
-      
+
     //setting the puzzle to mouse position on drag it works like a charm away from how stupid btw XD
     private void OnMouseDrag()
     {

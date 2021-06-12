@@ -25,7 +25,7 @@ public class PlayerMovment : MonoBehaviour
 
 
         //cam follow 
-        cam.position = new Vector2 (transform.position.x , 0f);
+        cam.position = new Vector3 (transform.position.x , 0f, -4f);
         
     }
 
@@ -36,20 +36,8 @@ public class PlayerMovment : MonoBehaviour
         rb.MovePosition(rb.position + movment * (speed * Time.fixedDeltaTime));
     }
 
-
-    //collision and checking
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "obsticle")
-        {
-            Destroy();
-        }
-    }
-
-
-
     //death and replaying menu view
-    void Destroy()
+    public void Destroy()
     {
         Destroy(gameObject);
 

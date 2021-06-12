@@ -11,9 +11,7 @@ public class Replaying : MonoBehaviour
     /// </summary>
     public void replay()
     {
-
         SceneManager.LoadScene("sc1");
-
     }
 
     public void Exit()
