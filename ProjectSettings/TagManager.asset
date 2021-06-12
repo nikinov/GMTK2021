@@ -7,6 +7,7 @@ TagManager:
   - obsticle
   - RightBorder
   - Piece
+  - Collect
   layers:
   - Default
   - TransparentFX

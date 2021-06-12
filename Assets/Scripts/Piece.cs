@@ -11,7 +11,7 @@ public class Piece : MonoBehaviour
     public bool basePiece;
     
     public float initDuration = .3f;
-    public float clickDuration = .1f;
+    public float clickDuration = .3f;
     public float initShot = 1;
 
     private bool _init = false;
@@ -39,12 +39,15 @@ public class Piece : MonoBehaviour
              transform.DOMoveX(transform.position.x - 1, initDuration);
              transform.DORotate(_initRot, initDuration);
              StartCoroutine(waitForInit());
+             transform.parent.GetChild(0).localPosition = new Vector2(transform.parent.GetChild(0).localPosition.x - 1, transform.parent.GetChild(0).localPosition.y);
          }
          else if (other.transform == transform.parent.GetChild(0) && _init && !basePiece)
          {
+             print("yayyyyy");
              OnClicked?.Invoke();
              transform.DOMove(transform.parent.GetChild(0).position, clickDuration);
              transform.DORotate(transform.parent.GetChild(0).localEulerAngles, clickDuration);
+             gameObject.tag = "Collect";
          }
     }
 

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        _playerMovment = FindObjectOfType<PlayerMovment>();
         _gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && _grabbed)
         {
             Vector3 origin = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-            _grabbedObj.localPosition = new Vector3(origin.x - _grabOffset.x, origin.y - _grabOffset.y);
+            _grabbedObj.position = new Vector3(origin.x - _grabOffset.x, origin.y - _grabOffset.y, 0);
         }
 
         if (Input.GetMouseButtonUp(0))
