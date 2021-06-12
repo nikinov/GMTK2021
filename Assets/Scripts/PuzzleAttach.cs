@@ -1,31 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PuzzleAttach : MonoBehaviour
 {
+    private Vector2 _pos;
+    private Camera _camera;
 
-    Vector2 pos;
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
 
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //get mouse input in pixels
-        Vector3 mouse = Input.mousePosition;
-       
-        
-        //turning mouse pixel position to world space vectors
-        pos = Camera.main.ScreenToWorldPoint(mouse);
+        var mouse = Input.mousePosition;
 
-        
-       
+        //turning mouse pixel position to world space vectors
+        _pos = _camera.ScreenToWorldPoint(mouse);
     }
     
-      
     //setting the puzzle to mouse position on drag it works like a charm away from how stupid btw XD
     private void OnMouseDrag()
     {
-        transform.position = pos;
+        transform.position = _pos;
     }
 }
