@@ -22,14 +22,17 @@ public class PlayerMovment : MonoBehaviour
     Vector2 bot;
 
     public Transform MidTarget;
-    Vector2 mid;
+    Vector3 mid;
 
+
+    Vector3 offset;
+
+    Vector2 pos;
 
     private void Start()
     {
 
-        
-
+       
     }
 
 
@@ -47,6 +50,7 @@ public class PlayerMovment : MonoBehaviour
 
         mid = MidTarget.position;
 
+        
         //geting H & V input
         movment.x = 1f;
 
@@ -55,34 +59,29 @@ public class PlayerMovment : MonoBehaviour
 
         //cam follow 
         cam.position = new Vector3 (transform.position.x , 0f, -4f);
+        BotTarget.position = new Vector3(transform.position.x , -4f, -4f);
+        TopTarget.position = new Vector3(transform.position.x , 4f, -4f);
+        MidTarget.position = new Vector3(transform.position.x, 0f, -4f);
+
 
 
         if (Input.GetKey(KeyCode.W))
         {
-           transform.position =  Vector2.MoveTowards(transform.position, top, speed * Time.deltaTime);
+           transform.position =  Vector2.Lerp(transform.position, top, speed * Time.deltaTime);
             
         }
-      
-
-
-
         if (Input.GetKey(KeyCode.S))
         {
 
-          transform.position =  Vector2.MoveTowards(transform.position, bot, speed * Time.deltaTime);
+          transform.position =  Vector2.Lerp(transform.position, bot, speed * Time.deltaTime);
 
         }
-        
-        
+        if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && transform.position != mid)
+        {
+            transform.position = Vector2.Lerp(transform.position,new Vector2 (transform.position.x,0), speed * Time.deltaTime);
+        }
 
-       if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
-       {
-            transform.position = Vector2.MoveTowards(transform.position, mid, speed * Time.deltaTime);
-       }
-
-
-        //transform.position +=new Vector3 (1f,0f,0f) * Time.deltaTime;
-
+        transform.Translate(Vector3.right * speed *Time.deltaTime);
 
     }
 
@@ -90,7 +89,7 @@ public class PlayerMovment : MonoBehaviour
     private void FixedUpdate()
     {
         //moving using rigidbody
-       //rb.MovePosition(rb.position + new Vector2(movment.x,0f) * (speed * Time.fixedDeltaTime));
+        //rb.MovePosition(rb.position + movment * (speed * Time.fixedDeltaTime));
 
 
 
