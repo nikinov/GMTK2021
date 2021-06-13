@@ -7,10 +7,6 @@ public class PlayerMovment : MonoBehaviour
 
     public float speed = 10f;
 
-    [SerializeField] private Rigidbody2D rb;
-    
-    private Vector2 movment;
-
     public GameObject ReplayMenu;
 
     public Transform TopTarget;
@@ -26,12 +22,6 @@ public class PlayerMovment : MonoBehaviour
 
     Vector2 pos;
 
-    private void Start()
-    {
-
-       
-    }
-    
     // Update is called once per frame
     void Update()
     {
@@ -41,10 +31,6 @@ public class PlayerMovment : MonoBehaviour
         bot = BotTarget.position;
 
         mid = MidTarget.position;
-
-        
-        //geting H & V input
-        movment.x = 1f;
 
         //movment.y = Input.GetAxisRaw("Vertical");
         
