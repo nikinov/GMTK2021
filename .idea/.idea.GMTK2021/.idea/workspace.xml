@@ -20,8 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ca31f33-fb99-4ef1-8a54-69322f55239e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Rendering/2DPipline.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Rendering/2DPipline.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sc1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sc1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GMTK2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GMTK2021/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sc2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sc2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sc2.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sc2.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Piece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PuzzleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PuzzleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Replaying.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Replaying.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +48,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts_Reddcube/PlayerMovment.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/mm.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PuzzleTrigger.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Replaying.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PuzzleController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Piece.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovment.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Replaying.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Piece.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PuzzleController.cs" />
       </list>
     </option>
   </component>

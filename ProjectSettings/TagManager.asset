@@ -8,6 +8,7 @@ TagManager:
   - RightBorder
   - Piece
   - Collect
+  - LeftBorder
   layers:
   - Default
   - TransparentFX

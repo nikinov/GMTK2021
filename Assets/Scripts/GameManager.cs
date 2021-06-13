@@ -1,18 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform backgrounds;
+    private Player _player;
+    private List<Transform> _backgrounds;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        _backgrounds = new List<Transform>();
+        foreach (Transform background in backgrounds)
+        {
+            _backgrounds.Add(background);
+        }
         
+        _player = FindObjectOfType<Player>();
     }
 }

@@ -9,11 +9,15 @@ public class Piece : MonoBehaviour
 {
     public delegate void ClickAction();
     public event ClickAction OnClicked;
-    public bool basePiece;
+    public delegate void EndLifeAction();
+    public event EndLifeAction OnEndLife;
     
-    public float initDuration = .3f;
-    public float clickDuration = .3f;
-    public float initShot = 1;
+    public bool basePiece;
+    public bool collcted;
+    
+    private float initDuration = .3f;
+    private float clickDuration = .3f;
+    private float initShot = 1;
 
     private bool _init = false;
     private bool _grabbed;
@@ -24,9 +28,17 @@ public class Piece : MonoBehaviour
 
     private PuzzleController _puzzleController;
 
+    private Rigidbody2D _rigidbody2D;
+
     private void Start()
     {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _puzzleController = FindObjectOfType<PuzzleController>();
+        initDuration = _puzzleController.initDuration;
+        clickDuration = _puzzleController.clickDuration;
+        initShot = _puzzleController.initShot;
+        if (basePiece)
+            collcted = true;
         _initScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         _initRot = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z - 180);
@@ -42,24 +54,45 @@ public class Piece : MonoBehaviour
              transform.DOScale(_initScale, initDuration);
              transform.DOMoveX(transform.position.x - initShot, initDuration);
              transform.DORotate(_initRot, initDuration);
-             StartCoroutine(waitForInit());
-             if(!basePiece)
-                transform.parent.GetChild(0).DOMoveX(transform.parent.GetChild(0).position.x - initShot + .5f, initDuration);
+             if (!basePiece)
+                 transform.parent.GetChild(transform.GetSiblingIndex() - 1).DOMoveX(
+                     transform.parent.GetChild(transform.GetSiblingIndex() - 1).position.x - initShot, initDuration);
+             else
+                 StartCoroutine(waitForAnim(initDuration));
+             _init = true;
          }
-         else if (other.transform == transform.parent.GetChild(0) && _init && !basePiece)
+         else if (_init && !basePiece)
          {
-             print("yayyyyy");
-             OnClicked?.Invoke();
-             transform.DOMove(transform.parent.GetChild(0).position, clickDuration);
-             transform.DORotate(transform.parent.GetChild(0).localEulerAngles, clickDuration);
-             gameObject.name = "Done";
+             if (other.transform == transform.parent.GetChild(transform.GetSiblingIndex() - 1))
+             {
+                  print("yayyyyy");
+                  OnClicked?.Invoke();
+                  transform.DOMove(transform.parent.GetChild(transform.GetSiblingIndex() - 1).position, clickDuration);
+                  transform.DORotate(transform.parent.GetChild(transform.GetSiblingIndex() - 1).localEulerAngles, clickDuration);
+                  collcted = true;
+                  _init = false;
+                  StartCoroutine(waitForAnim(clickDuration));
+             }
+         }
+         else if (other.gameObject.CompareTag("LeftBorder"))
+         {
+             OnEndLife?.Invoke();
          }
     }
 
-
-    IEnumerator waitForInit()
+    public void FreePiece()
     {
-        yield return new WaitForSeconds(initDuration);
-        _init = true;
+        _rigidbody2D.constraints = RigidbodyConstraints2D.None;
+    }
+
+    IEnumerator waitForAnim(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
+
+
+
+
+

@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int health { get; private set; } = 3;
+    public delegate void CollectAction(Transform puzzle);
+    public event CollectAction OnCollected;
 
     [SerializeField] private float consumeTime;
 
@@ -58,33 +59,36 @@ public class Player : MonoBehaviour
     {
         if (other.collider.CompareTag("obsticle") || other.collider.CompareTag("Piece"))
         {
-            _playerMovment.Destroy();
+            InstantDeath();
         }
         else if (other.collider.CompareTag("Collect"))
         {
-            other.collider.transform.DOScale(new Vector3(0, 0, 0), consumeTime);
-            other.collider.gameObject.SetActive(false);
+            OnCollected?.Invoke(other.transform);
         }
     }
 
-    public void AddHealth()
+    public void InstantDeath()
     {
-        health += 1;
-    }
-
-    public void SubtractHealth()
-    {
-        health -= 1;
-    }
-
-    public void ResetHealth()
-    {
-        health = 3;
+        _playerMovment.Destroy();
     }
 
     public void StopGrab()
     {
         _grabbed = false;
+    }
+
+    public void CollectItem(Transform forDestruction, float duration)
+    {
+        StartCoroutine(waitForConsume(forDestruction, duration));
+    }
+
+
+    IEnumerator waitForConsume(Transform piece, float duration)
+    {
+        piece.DOScale(Vector3.zero, duration);
+        piece.DOScale(piece.localEulerAngles - new Vector3(0, 0, 180), duration);
+        yield return new WaitForSeconds(duration);
+        Destroy(piece.gameObject);
     }
 }
 
