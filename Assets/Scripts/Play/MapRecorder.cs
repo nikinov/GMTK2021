@@ -16,6 +16,7 @@ public class MapRecorder : MonoBehaviour
     public string currentSave;
 
     [SerializeField] private Transform finishLine;
+    [SerializeField] private float finishLineShow;
     
     private Player _player;
     private PlayerMovment _playerMovement;
@@ -108,7 +109,7 @@ public class MapRecorder : MonoBehaviour
             StartCoroutine(waitForInstantiate(insert, timing));
         }
 
-        StartCoroutine(waitForFinish(timing));
+        StartCoroutine(waitForFinish());
     }
 
     IEnumerator waitForInstantiate(Insert insert, float timing)
@@ -121,9 +122,9 @@ public class MapRecorder : MonoBehaviour
         OnMake?.Invoke(g.transform);
     }
 
-    IEnumerator waitForFinish(float duration)
+    IEnumerator waitForFinish()
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(finishLineShow);
         finishLine.position += new Vector3(_player.transform.position.x + 30, 0);
     }
 }
