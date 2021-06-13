@@ -26,12 +26,14 @@
             <e p="MainMenuManager.cs" t="Include" />
           </e>
           <e p="Play" t="Include">
+            <e p="AudioManager.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
             <e p="MapRecorder.cs" t="Include" />
             <e p="Piece.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="PlayerMovment.cs" t="Include" />
             <e p="PuzzleController.cs" t="Include" />
+            <e p="Sound.cs" t="Include" />
             <e p="UiManager.cs" t="Include" />
           </e>
         </e>

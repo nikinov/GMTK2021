@@ -13,8 +13,8 @@ public class MapRecorder : MonoBehaviour
     public List<KeyCode> keyCodes;
     public List<GameObject> puzzlePrefs;
     public bool recoreder;
-    public string currentSave;
 
+    [SerializeField] private string mapName;
     [SerializeField] private Transform finishLine;
     [SerializeField] private float finishLineShow;
     
@@ -27,7 +27,6 @@ public class MapRecorder : MonoBehaviour
     private void Awake()
     {
         _timeStamps = new List<Insert>();
-        
         _player = FindObjectOfType<Player>();
         _playerMovement = FindObjectOfType<PlayerMovment>();
         _puzzleController = FindObjectOfType<PuzzleController>();
@@ -48,7 +47,7 @@ public class MapRecorder : MonoBehaviour
         }
         else
         {
-            foreach (string str in PlayerPrefs.GetString(currentSave).Split('$'))
+            foreach (string str in PlayerPrefs.GetString(PlayerPrefs.GetString("#")).Split('$'))
             {
                 string[] nsr = str.Split('#');
                 Insert insert = new Insert();
@@ -95,7 +94,7 @@ public class MapRecorder : MonoBehaviour
                     else
                         encode = encode + "$" + insert.timeStamp + "#" + insert.type;
                 }
-                PlayerPrefs.SetString(currentSave, encode);
+                PlayerPrefs.SetString(mapName, encode);
             }
         }
     }

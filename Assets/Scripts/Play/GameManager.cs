@@ -9,11 +9,20 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform backgrounds;
     [SerializeField] private float backgroundSize;
+    [SerializeField] private float songDelay;
     
     private Player _player;
+    private AudioManager _audioManager;
     private List<Transform> _backgrounds;
     private Transform _lastTransform;
     private int count = -1;
+
+    private void Awake()
+    {
+        PlayerPrefs.SetString("#", "JOURNEY");
+        _audioManager = FindObjectOfType<AudioManager>();
+        StartCoroutine(waitForSong());
+    }
 
     private void Start()
     {
@@ -41,5 +50,11 @@ public class GameManager : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(0);
+    }
+
+    IEnumerator waitForSong()
+    {
+        yield return new WaitForSeconds(songDelay);
+        _audioManager.PlaySound(PlayerPrefs.GetString("#"));
     }
 }

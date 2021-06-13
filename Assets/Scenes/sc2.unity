@@ -375,7 +375,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 13a705660462f3f4d850c6062efaa2ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b3d7092020ad4e3cba8b87339584997, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -895,7 +895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &511454950
 Transform:
   m_ObjectHideFlags: 0
@@ -1749,6 +1749,7 @@ GameObject:
   - component: {fileID: 1591323857}
   - component: {fileID: 1591323861}
   - component: {fileID: 1591323858}
+  - component: {fileID: 1591323860}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1770,6 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgrounds: {fileID: 2037413408}
   backgroundSize: 17
+  songDelay: 0
 --- !u!114 &1591323858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,7 +1793,7 @@ MonoBehaviour:
   - {fileID: 526470372439710232, guid: 02c1d315daa1a4b079dcdd3f22713afb, type: 3}
   - {fileID: 7990792935012898345, guid: d48b01daee4e24b33807a1f8fc886a46, type: 3}
   recoreder: 0
-  currentSave: JOURNEY
+  mapName: 
   finishLine: {fileID: 1002451646}
   finishLineShow: 30
 --- !u!4 &1591323859
@@ -1808,6 +1810,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1591323860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591323856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e31877d2c37148d5ae4bd948024fc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: JOURNEY
+    clip: {fileID: 8300000, guid: f7968d0527c7c403e9e53e44e369b454, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: LOFI
+    clip: {fileID: 8300000, guid: 7486174dd386e4f378b13d43f1c6d45c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: GREEN
+    clip: {fileID: 8300000, guid: 00725c042d6154b109d6b4d7a8bee0c4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!114 &1591323861
 MonoBehaviour:
   m_ObjectHideFlags: 0
