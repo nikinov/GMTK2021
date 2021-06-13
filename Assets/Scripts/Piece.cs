@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using DG.Tweening;
 using UnityEngine;
 
@@ -21,8 +22,11 @@ public class Piece : MonoBehaviour
     private Vector3 _initScale;
     private Vector2 _startPos;
 
+    private PuzzleController _puzzleController;
+
     private void Start()
     {
+        _puzzleController = FindObjectOfType<PuzzleController>();
         _initScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         _initRot = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z - 180);
@@ -36,10 +40,11 @@ public class Piece : MonoBehaviour
          if (other.gameObject.CompareTag("RightBorder") && !_init)
          {
              transform.DOScale(_initScale, initDuration);
-             transform.DOMoveX(transform.position.x - 1, initDuration);
+             transform.DOMoveX(transform.position.x - initShot, initDuration);
              transform.DORotate(_initRot, initDuration);
              StartCoroutine(waitForInit());
-             transform.parent.GetChild(0).localPosition = new Vector2(transform.parent.GetChild(0).localPosition.x - 1, transform.parent.GetChild(0).localPosition.y);
+             if(!basePiece)
+                transform.parent.GetChild(0).DOMoveX(transform.parent.GetChild(0).position.x - initShot + .5f, initDuration);
          }
          else if (other.transform == transform.parent.GetChild(0) && _init && !basePiece)
          {
@@ -47,14 +52,10 @@ public class Piece : MonoBehaviour
              OnClicked?.Invoke();
              transform.DOMove(transform.parent.GetChild(0).position, clickDuration);
              transform.DORotate(transform.parent.GetChild(0).localEulerAngles, clickDuration);
-             gameObject.tag = "Collect";
+             gameObject.name = "Done";
          }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        
-    }
 
     IEnumerator waitForInit()
     {

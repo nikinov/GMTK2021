@@ -25,6 +25,7 @@
           <e p="ColorController.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="MapRecorder.cs" t="Include" />
+          <e p="NewBehaviourScript.cs" t="Include" />
           <e p="Piece.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerMovment.cs" t="Include" />

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public int health { get; private set; } = 3;
+
+    [SerializeField] private float consumeTime;
 
     private PlayerMovment _playerMovment;
     private GameManager _gameManager;
@@ -56,6 +59,11 @@ public class Player : MonoBehaviour
         if (other.collider.CompareTag("obsticle") || other.collider.CompareTag("Piece"))
         {
             _playerMovment.Destroy();
+        }
+        else if (other.collider.CompareTag("Collect"))
+        {
+            other.collider.transform.DOScale(new Vector3(0, 0, 0), consumeTime);
+            other.collider.gameObject.SetActive(false);
         }
     }
 

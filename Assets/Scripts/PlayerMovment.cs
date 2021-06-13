@@ -11,8 +11,6 @@ public class PlayerMovment : MonoBehaviour
     
     private Vector2 movment;
 
-    public Transform cam;
-
     public GameObject ReplayMenu;
 
     public Transform TopTarget;
@@ -24,7 +22,6 @@ public class PlayerMovment : MonoBehaviour
     public Transform MidTarget;
     Vector3 mid;
 
-
     Vector3 offset;
 
     Vector2 pos;
@@ -34,12 +31,7 @@ public class PlayerMovment : MonoBehaviour
 
        
     }
-
-
-
-
-
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -55,10 +47,7 @@ public class PlayerMovment : MonoBehaviour
         movment.x = 1f;
 
         //movment.y = Input.GetAxisRaw("Vertical");
-
-
-        //cam follow 
-        cam.position = new Vector3 (transform.position.x , 0f, -4f);
+        
         BotTarget.position = new Vector3(transform.position.x , -4f, -4f);
         TopTarget.position = new Vector3(transform.position.x , 4f, -4f);
         MidTarget.position = new Vector3(transform.position.x, 0f, -4f);
@@ -66,23 +55,19 @@ public class PlayerMovment : MonoBehaviour
 
 
         if (Input.GetKey(KeyCode.W))
-        {
-           transform.position =  Vector2.Lerp(transform.position, top, speed * Time.deltaTime);
-            
+        { 
+            transform.position =  Vector2.Lerp(transform.position, top, speed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-
-          transform.position =  Vector2.Lerp(transform.position, bot, speed * Time.deltaTime);
-
+            transform.position =  Vector2.Lerp(transform.position, bot, speed * Time.deltaTime);
         }
         if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && transform.position != mid)
         {
             transform.position = Vector2.Lerp(transform.position,new Vector2 (transform.position.x,0), speed * Time.deltaTime);
         }
-
-        transform.Translate(Vector3.right * speed *Time.deltaTime);
-
+        
+        transform.parent.Translate(Vector3.right * (speed * Time.deltaTime));
     }
 
 
@@ -90,13 +75,6 @@ public class PlayerMovment : MonoBehaviour
     {
         //moving using rigidbody
         //rb.MovePosition(rb.position + movment * (speed * Time.fixedDeltaTime));
-
-
-
-
-
-
-
     }
 
     //death and replaying menu view

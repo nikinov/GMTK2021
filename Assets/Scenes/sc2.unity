@@ -299,6 +299,7 @@ Transform:
   m_Children:
   - {fileID: 853038093}
   - {fileID: 844681259}
+  - {fileID: 1134278208}
   m_Father: {fileID: 957418860}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -447,6 +448,9 @@ MonoBehaviour:
   rb: {fileID: 197613194}
   cam: {fileID: 1814000450}
   ReplayMenu: {fileID: 1075478633}
+  TopTarget: {fileID: 0}
+  BotTarget: {fileID: 0}
+  MidTarget: {fileID: 0}
 --- !u!50 &197613194
 Rigidbody2D:
   serializedVersion: 4
@@ -560,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02fdf8f8693cc4da6958c6307bbc26f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumeTime: 0
 --- !u!1 &329428489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,7 +1085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853038092}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.50349927, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 48622899}
@@ -1309,7 +1314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be05aa050fb44c94bcdd1553d32ef5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzles: []
+  puzzles:
+  - pieces: []
+  - pieces: []
 --- !u!4 &957418860
 Transform:
   m_ObjectHideFlags: 0
@@ -1322,7 +1329,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 48622899}
-  - {fileID: 1134278208}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1698,12 +1704,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134278203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: 0, z: 0}
-  m_LocalScale: {x: 2.022365, y: 1.9265172, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 807181141}
-  m_Father: {fileID: 957418860}
-  m_RootOrder: 1
+  m_Father: {fileID: 48622899}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1134278209
 Rigidbody2D:
