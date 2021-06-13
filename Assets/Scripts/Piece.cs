@@ -11,6 +11,8 @@ public class Piece : MonoBehaviour
     public event ClickAction OnClicked;
     public delegate void EndLifeAction();
     public event EndLifeAction OnEndLife;
+    public delegate void highlightAction(Puzzle puzzle);
+    public event highlightAction OnHighlight;
     
     public bool basePiece;
     public bool collcted;
@@ -29,6 +31,8 @@ public class Piece : MonoBehaviour
     private PuzzleController _puzzleController;
 
     private Rigidbody2D _rigidbody2D;
+
+    private Puzzle _puzzle;
 
     private void Start()
     {
@@ -77,6 +81,15 @@ public class Piece : MonoBehaviour
          {
              OnEndLife?.Invoke();
          }
+         else if (other.gameObject.CompareTag("HighlightBorder") && _init)
+         {
+             OnHighlight?.Invoke(_puzzle);
+         }
+    }
+
+    public void SetPuzzle(Puzzle puzzle)
+    {
+        _puzzle = puzzle;
     }
 
     public void FreePiece()

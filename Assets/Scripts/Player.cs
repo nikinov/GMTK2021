@@ -49,11 +49,6 @@ public class Player : MonoBehaviour
             Vector3 origin = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
             _grabbedObj.position = new Vector3(origin.x - _grabOffset.x, origin.y - _grabOffset.y, 0);
         }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            _grabbed = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -65,6 +60,10 @@ public class Player : MonoBehaviour
         else if (other.gameObject.CompareTag("Collect"))
         {
             OnCollected?.Invoke(other.transform);
+            foreach (Transform tr in other.transform.parent)
+            {
+                tr.gameObject.tag = "Untagged";
+            }
         }
         else if (other.gameObject.CompareTag("Finish"))
         {

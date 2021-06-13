@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow
+  m_Name: LitUpMatNoTouch
   m_Shader: {fileID: -6465566751694194690, guid: 6e5fb357e556d4e09abe3406a45ad036,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
@@ -44,6 +44,6 @@ Material:
     - _EnableExternalAlpha: 0
     m_Colors:
     - Color_1256EBB7: {r: 3.2243402, g: 0.92775816, b: 0.92775816, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.0009765625, g: 0.0009765625, b: 0.0009765625, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

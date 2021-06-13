@@ -10,6 +10,7 @@ TagManager:
   - Collect
   - LeftBorder
   - FinishLine
+  - HighlightBorder
   layers:
   - Default
   - TransparentFX

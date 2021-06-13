@@ -8,17 +8,27 @@ using UnityEngine.UI;
 
 public class PuzzleController : MonoBehaviour
 {
-    private List<Puzzle> puzzles;
+    [SerializeField] private Material highlight; 
     public float initDuration = .3f;
     public float clickDuration = .3f;
     public float initShot = 1;
     public float consumeDuration = .3f;
+    public float highLightIntensity;
+    public float normalLightIntensity;
+    public float litUpDuration;
+    private bool _nothingHighlighted;
+    
+    private List<Puzzle> _puzzles;
+    private List<Puzzle> _highlightPuzzles;
     private Player _player;
     // Start is called before the first frame update
     void Start()
     {
-        puzzles = new List<Puzzle>();
+        _nothingHighlighted = true;
+        _puzzles = new List<Puzzle>();
+        _highlightPuzzles = new List<Puzzle>();
         _player = FindObjectOfType<Player>();
+        _player.OnCollected += ConsumeHighlight;
         foreach (Transform t in transform)
         {
             Puzzle puzzle = new Puzzle();
@@ -31,50 +41,104 @@ public class PuzzleController : MonoBehaviour
                     Piece piece = tr.GetComponent<Piece>();
                     if(piece)
                         puzzle.pieces.Add(piece);
+                    piece.OnHighlight += Highlight;
                 }
                 catch (Exception e) { }
             }
-            print(puzzle.pieces.Count);
+
+            puzzle.highLightIntensity = highLightIntensity;
+            puzzle.normalLightIntensity = normalLightIntensity;
+            puzzle.litUpDuration = litUpDuration;
+            
             puzzle.Init(_player);
-            puzzles.Add(puzzle);
+            _puzzles.Add(puzzle);
+        }
+    }
+    private void Highlight(Puzzle puzzle)
+    {
+        _highlightPuzzles.Add(puzzle);
+        if (_nothingHighlighted)
+        {
+            puzzle.SetMat(highlight);
+            _nothingHighlighted = false;
+        }
+        else
+        {
+            puzzle.canHighlight = true;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ConsumeHighlight(Transform pice)
     {
-        
+        print(_highlightPuzzles.Count);
+        _highlightPuzzles.Remove(_highlightPuzzles[0]);
+        print("count2: " + _highlightPuzzles.Count);
+        if (_highlightPuzzles.Count > 0)
+        {
+            _highlightPuzzles[0].SetMat(highlight);
+            _nothingHighlighted = false;
+        }
+        else
+        {
+            _nothingHighlighted = true;
+        }
     }
-
 }
 
 [Serializable]
-class Puzzle
+public class Puzzle
 {
     public bool isCollected;
+    public bool canHighlight;
     public float consumeDuration;
+    public float highLightIntensity;
+    public float normalLightIntensity;
+    public float litUpDuration;
     public List<Piece> pieces;
-    private List<Transform> piecesT;
+    public List<SpriteRenderer> _sprites { get; private set; }
+    private List<Transform> _piecesT;
     private Player _player;
 
     private int _clickAmount = 1;
 
     public void Init(Player player)
     {
-        piecesT = new List<Transform>();
+        _piecesT = new List<Transform>();
+        _sprites = new List<SpriteRenderer>();
         _player = player;
         player.OnCollected += CollectPuzzle;
         foreach (Piece piece in pieces)
         {
+            SpriteRenderer spriteRenderer = piece.GetComponent<SpriteRenderer>();
+            _sprites.Add(spriteRenderer);
             piece.OnEndLife += _player.InstantDeath;
-            piecesT.Add(piece.transform);
+            _piecesT.Add(piece.transform);
             if (!piece.basePiece)
             {
                 piece.OnClicked += ClickPuzzle;
             }
+            piece.SetPuzzle(this);
+            float factor = Mathf.Pow(2,normalLightIntensity);
+            Color color = new Color(spriteRenderer.material.color.r*factor,spriteRenderer.material.color.g*factor,spriteRenderer.material.color.b*factor);
+            spriteRenderer.materials[0].color = color;
         }
     }
-    
+
+    public void SetMat(Material mat)
+    {
+        foreach (SpriteRenderer sprite in _sprites)
+        {
+            float factor = Mathf.Pow(2,normalLightIntensity);
+            Color color = new Color(sprite.material.color.r*factor,sprite.material.color.g*factor,sprite.material.color.b*factor);
+            sprite.materials[0].color = color;
+            sprite.material = mat;
+            factor = Mathf.Pow(2,highLightIntensity);
+            sprite.materials[0].DOColor(
+                new Color(sprite.material.color.r * factor, sprite.material.color.g * factor,
+                    sprite.material.color.b * factor), litUpDuration);
+        }
+    }
+
     private void ClickPuzzle()
     {
         _clickAmount += 1;
@@ -91,7 +155,7 @@ class Puzzle
 
     private void CollectPuzzle(Transform puzzleT)
     {
-        if (piecesT.Contains(puzzleT))
+        if (_piecesT.Contains(puzzleT))
         {
             if (isCollected)
             {
@@ -100,7 +164,7 @@ class Puzzle
                     piece.FreePiece();
                 }
                 
-                _player.CollectItem(piecesT[0].parent, consumeDuration);
+                _player.CollectItem(_piecesT[0].parent, consumeDuration);
             }
             else
             {
