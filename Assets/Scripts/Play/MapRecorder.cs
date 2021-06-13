@@ -14,9 +14,11 @@ public class MapRecorder : MonoBehaviour
     public List<GameObject> puzzlePrefs;
     public bool recoreder;
     public string currentSave;
+
+    [SerializeField] private Transform finishLine;
     
     private Player _player;
-    private PlayerMovment _playerMovment;
+    private PlayerMovment _playerMovement;
     private PuzzleController _puzzleController;
     private List<Insert> _timeStamps;
     private float _prevTime;
@@ -26,7 +28,7 @@ public class MapRecorder : MonoBehaviour
         _timeStamps = new List<Insert>();
         
         _player = FindObjectOfType<Player>();
-        _playerMovment = FindObjectOfType<PlayerMovment>();
+        _playerMovement = FindObjectOfType<PlayerMovment>();
         _puzzleController = FindObjectOfType<PuzzleController>();
 
         if (recoreder)
@@ -92,7 +94,6 @@ public class MapRecorder : MonoBehaviour
                     else
                         encode = encode + "$" + insert.timeStamp + "#" + insert.type;
                 }
-                print(encode);
                 PlayerPrefs.SetString(currentSave, encode);
             }
         }
@@ -106,6 +107,8 @@ public class MapRecorder : MonoBehaviour
             timing += insert.timeStamp;
             StartCoroutine(waitForInstantiate(insert, timing));
         }
+
+        StartCoroutine(waitForFinish(timing));
     }
 
     IEnumerator waitForInstantiate(Insert insert, float timing)
@@ -116,6 +119,12 @@ public class MapRecorder : MonoBehaviour
             _puzzleController.transform);
         g.transform.position += new Vector3(_player.transform.position.x, 0);
         OnMake?.Invoke(g.transform);
+    }
+
+    IEnumerator waitForFinish(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        finishLine.position += new Vector3(_player.transform.position.x + 30, 0);
     }
 }
 

@@ -22,17 +22,18 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="ColorController.cs" t="Include" />
-          <e p="GameManager.cs" t="Include" />
-          <e p="MapRecorder.cs" t="Include" />
-          <e p="NewBehaviourScript.cs" t="Include" />
-          <e p="Piece.cs" t="Include" />
-          <e p="Player.cs" t="Include" />
-          <e p="PlayerMovment.cs" t="Include" />
-          <e p="PuzzleAttach.cs" t="Include" />
-          <e p="PuzzleController.cs" t="Include" />
-          <e p="SpawnManager.cs" t="Include" />
-          <e p="UiManager.cs" t="Include" />
+          <e p="MainMenu" t="Include">
+            <e p="MainMenuManager.cs" t="Include" />
+          </e>
+          <e p="Play" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="MapRecorder.cs" t="Include" />
+            <e p="Piece.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+            <e p="PlayerMovment.cs" t="Include" />
+            <e p="PuzzleController.cs" t="Include" />
+            <e p="UiManager.cs" t="Include" />
+          </e>
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
