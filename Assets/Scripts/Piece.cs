@@ -65,7 +65,6 @@ public class Piece : MonoBehaviour
          {
              if (other.transform == transform.parent.GetChild(transform.GetSiblingIndex() - 1))
              {
-                  print("yayyyyy");
                   OnClicked?.Invoke();
                   transform.DOMove(transform.parent.GetChild(transform.GetSiblingIndex() - 1).position, clickDuration);
                   transform.DORotate(transform.parent.GetChild(transform.GetSiblingIndex() - 1).localEulerAngles, clickDuration);
@@ -74,7 +73,7 @@ public class Piece : MonoBehaviour
                   StartCoroutine(waitForAnim(clickDuration));
              }
          }
-         else if (other.gameObject.CompareTag("LeftBorder"))
+         else if (other.gameObject.CompareTag("LeftBorder") && _init)
          {
              OnEndLife?.Invoke();
          }

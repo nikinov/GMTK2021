@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 origin = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-            print(origin);
             RaycastHit2D hit = Physics2D.Raycast(origin, new Vector3(0, 0, 1));
             if (hit.collider != null)
             {
