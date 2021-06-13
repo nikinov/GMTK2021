@@ -61,7 +61,7 @@ public class Piece : MonoBehaviour
                  StartCoroutine(waitForAnim(initDuration));
              _init = true;
          }
-         else if (_init && !basePiece)
+         else if (_init && !basePiece && !other.CompareTag("Player"))
          {
              if (other.transform == transform.parent.GetChild(transform.GetSiblingIndex() - 1))
              {

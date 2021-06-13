@@ -53,19 +53,19 @@ public class Player : MonoBehaviour
             _grabbed = false;
         }
     }
-    
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.CompareTag("obsticle") || other.collider.CompareTag("Piece"))
+        if (other.gameObject.CompareTag("obsticle") || other.gameObject.CompareTag("Piece"))
         {
             InstantDeath();
         }
-        else if (other.collider.CompareTag("Collect"))
+        else if (other.gameObject.CompareTag("Collect"))
         {
             OnCollected?.Invoke(other.transform);
         }
     }
+
 
     public void InstantDeath()
     {
@@ -87,8 +87,9 @@ public class Player : MonoBehaviour
     {
         piece.DOScale(Vector3.zero, duration);
         piece.DOScale(piece.localEulerAngles - new Vector3(0, 0, 180), duration);
+        piece.DOMoveX(piece.position.x - 1, duration);
         yield return new WaitForSeconds(duration);
-        Destroy(piece.gameObject);
+        piece.gameObject.SetActive(false);
     }
 }
 

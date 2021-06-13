@@ -99,6 +99,7 @@ class Puzzle
                 {
                     piece.FreePiece();
                 }
+                
                 _player.CollectItem(piecesT[0].parent, consumeDuration);
             }
             else
