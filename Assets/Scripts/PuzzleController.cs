@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PuzzleController : MonoBehaviour
 {
-    [SerializeField] private Material highlight; 
+    [SerializeField] private Material highlight;
     public float initDuration = .3f;
     public float clickDuration = .3f;
     public float initShot = 1;
@@ -17,10 +17,13 @@ public class PuzzleController : MonoBehaviour
     public float normalLightIntensity;
     public float litUpDuration;
     private bool _nothingHighlighted;
-    
+
     private List<Puzzle> _puzzles;
     private List<Puzzle> _highlightPuzzles;
     private Player _player;
+
+    private MapRecorder _mapRecorder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,32 +31,15 @@ public class PuzzleController : MonoBehaviour
         _puzzles = new List<Puzzle>();
         _highlightPuzzles = new List<Puzzle>();
         _player = FindObjectOfType<Player>();
+        _mapRecorder = FindObjectOfType<MapRecorder>();
         _player.OnCollected += ConsumeHighlight;
+        _mapRecorder.OnMake += MakeAdd;
         foreach (Transform t in transform)
         {
-            Puzzle puzzle = new Puzzle();
-            puzzle.pieces = new List<Piece>();
-            puzzle.consumeDuration = consumeDuration;
-            foreach (Transform tr in t)
-            {
-                try
-                {
-                    Piece piece = tr.GetComponent<Piece>();
-                    if(piece)
-                        puzzle.pieces.Add(piece);
-                    piece.OnHighlight += Highlight;
-                }
-                catch (Exception e) { }
-            }
-
-            puzzle.highLightIntensity = highLightIntensity;
-            puzzle.normalLightIntensity = normalLightIntensity;
-            puzzle.litUpDuration = litUpDuration;
-            
-            puzzle.Init(_player);
-            _puzzles.Add(puzzle);
+            MakeAdd(t);
         }
     }
+
     private void Highlight(Puzzle puzzle)
     {
         _highlightPuzzles.Add(puzzle);
@@ -83,6 +69,34 @@ public class PuzzleController : MonoBehaviour
             _nothingHighlighted = true;
         }
     }
+
+    public void MakeAdd(Transform t)
+    {
+        Puzzle puzzle = new Puzzle();
+        puzzle.pieces = new List<Piece>();
+        foreach (Transform tr in t)
+        {
+            try
+            {
+                Piece piece = tr.GetComponent<Piece>();
+                if (piece)
+                    puzzle.pieces.Add(piece);
+                piece.OnHighlight += Highlight;
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        puzzle.consumeDuration = consumeDuration;
+        puzzle.highLightIntensity = highLightIntensity;
+        puzzle.normalLightIntensity = normalLightIntensity;
+        puzzle.litUpDuration = litUpDuration;
+
+        puzzle.Init(_player);
+        _puzzles.Add(puzzle);
+    }
+
 }
 
 [Serializable]
