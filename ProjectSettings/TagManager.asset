@@ -9,6 +9,7 @@ TagManager:
   - Piece
   - Collect
   - LeftBorder
+  - FinishLine
   layers:
   - Default
   - TransparentFX

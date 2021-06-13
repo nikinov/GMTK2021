@@ -62,13 +62,4 @@ public class PlayerMovment : MonoBehaviour
         //moving using rigidbody
         //rb.MovePosition(rb.position + movment * (speed * Time.fixedDeltaTime));
     }
-
-    //death and replaying menu view
-    public void Destroy()
-    {
-        Destroy(gameObject);
-
-        ReplayMenu.SetActive(true);
-    }
-
 }

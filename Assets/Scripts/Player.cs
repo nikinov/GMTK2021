@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     private PlayerMovment _playerMovment;
     private GameManager _gameManager;
+    private UiManager _uiManager;
+    
     private Transform _grabbedObj;
     private bool _grabbed;
     private Vector2 _grabOffset;
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        _uiManager = FindObjectOfType<UiManager>();
         _playerMovment = FindObjectOfType<PlayerMovment>();
         _gameManager = FindObjectOfType<GameManager>();
     }
@@ -63,12 +66,24 @@ public class Player : MonoBehaviour
         {
             OnCollected?.Invoke(other.transform);
         }
+        else if (other.gameObject.CompareTag("Finish"))
+        {
+            FinishLevel();
+        }
     }
 
+    public void FinishLevel()
+    {
+        gameObject.SetActive(false);
+
+        _uiManager.FinishUI(1);
+    }
 
     public void InstantDeath()
     {
-        _playerMovment.Destroy();
+        gameObject.SetActive(false);
+
+        _uiManager.DeathUI(1);
     }
 
     public void StopGrab()

@@ -31,8 +31,8 @@
           <e p="PlayerMovment.cs" t="Include" />
           <e p="PuzzleAttach.cs" t="Include" />
           <e p="PuzzleController.cs" t="Include" />
-          <e p="Replaying.cs" t="Include" />
           <e p="SpawnManager.cs" t="Include" />
+          <e p="UiManager.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
