@@ -6,8 +6,30 @@ public class MainMenuManager : MonoBehaviour
 {
 
     public GameObject plane;
+    public GameObject first;
+    public GameObject sec;
 
 
+
+
+    public void song()
+    {
+
+        PlayerPrefs.SetString("#", "JOURNEY");
+        SceneManager.LoadScene("sc2");
+    }
+    public void song1()
+    {
+
+        PlayerPrefs.SetString("#", "LOFI");
+        SceneManager.LoadScene("sc2");
+    }
+    public void song2()
+    {
+
+        PlayerPrefs.SetString("#", "GREEN");
+        SceneManager.LoadScene("sc2");
+    }
 
     private void Start()
     {
@@ -19,9 +41,9 @@ public class MainMenuManager : MonoBehaviour
     public void play()
   {
 
-        SceneManager.LoadScene("sc2");
-
-  }
+        first.SetActive(false);
+        sec.SetActive(true);
+    }
 
 
 
