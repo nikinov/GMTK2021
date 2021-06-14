@@ -49,6 +49,7 @@ public class MapRecorder : MonoBehaviour
         {
             foreach (string str in PlayerPrefs.GetString(PlayerPrefs.GetString("#")).Split('$'))
             {
+                print(str);
                 string[] nsr = str.Split('#');
                 Insert insert = new Insert();
                 insert.timeStamp = float.Parse(nsr[0]);
@@ -123,7 +124,12 @@ public class MapRecorder : MonoBehaviour
 
     IEnumerator waitForFinish()
     {
-        yield return new WaitForSeconds(finishLineShow);
+        if (PlayerPrefs.GetString("#") == "JOURNEY")
+            yield return new WaitForSeconds(250);
+        else if (PlayerPrefs.GetString("#") == "GREEN")
+            yield return new WaitForSeconds(140);
+        else if (PlayerPrefs.GetString("#") == "LOFI")
+            yield return new WaitForSeconds(220);
         finishLine.position += new Vector3(_player.transform.position.x + 30, 0);
     }
 }

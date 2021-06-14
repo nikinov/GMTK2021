@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgrounds: {fileID: 2037413408}
   backgroundSize: 17
-  songDelay: 0
+  songDelay: 2
 --- !u!114 &1591323858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,7 +1793,7 @@ MonoBehaviour:
   - {fileID: 526470372439710232, guid: 02c1d315daa1a4b079dcdd3f22713afb, type: 3}
   - {fileID: 7990792935012898345, guid: d48b01daee4e24b33807a1f8fc886a46, type: 3}
   recoreder: 0
-  mapName: 
+  mapName: GREEN
   finishLine: {fileID: 1002451646}
   finishLineShow: 30
 --- !u!4 &1591323859
@@ -1825,21 +1825,14 @@ MonoBehaviour:
   sounds:
   - name: JOURNEY
     clip: {fileID: 8300000, guid: f7968d0527c7c403e9e53e44e369b454, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    source: {fileID: 0}
-  - name: LOFI
-    clip: {fileID: 8300000, guid: 7486174dd386e4f378b13d43f1c6d45c, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
   - name: GREEN
     clip: {fileID: 8300000, guid: 00725c042d6154b109d6b4d7a8bee0c4, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     playOnAwake: 0

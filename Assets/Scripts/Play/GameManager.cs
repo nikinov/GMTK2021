@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetString("#", "JOURNEY");
         _audioManager = FindObjectOfType<AudioManager>();
         StartCoroutine(waitForSong());
     }
